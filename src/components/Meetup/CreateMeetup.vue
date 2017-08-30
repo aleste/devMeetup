@@ -56,6 +56,21 @@
         </v-layout>
         <v-layout row>
           <v-flex xs12 sm6 offset-sm3>
+            <h4>Choose a Date & Time</h4>
+          </v-flex>
+        </v-layout>
+        <v-layout row class="mb-2">
+          <v-flex xs12 sm6 offset-sm3>
+            <v-date-picker v-model="date"></v-date-picker>
+          </v-flex>
+        </v-layout>
+        <v-layout row>
+          <v-flex xs12 sm6 offset-sm3>
+            <v-time-picker v-model="time" format="24hr"></v-time-picker>
+          </v-flex>
+        </v-layout>
+        <v-layout row>
+          <v-flex xs12 sm6 offset-sm3>
             <v-btn
               class="primary"
               :disabled="!formIsValid"
@@ -76,7 +91,9 @@
         title: null,
         location: null,
         imageUrl: null,
-        description: null
+        description: null,
+        date: new Date(),
+        time: new Date()
       }
     },
     computed: {
@@ -85,6 +102,11 @@
                this.location &&
                this.imageUrl &&
                this.description
+      },
+      submittableDateTime () {
+        const date = new Date(this.date)
+        console.log(this.date)
+        return date
       }
     },
     methods: {
@@ -98,7 +120,7 @@
           location: this.location,
           imageUrl: this.imageUrl,
           description: this.description,
-          date: new Date()
+          date: this.submittableDateTime
         }
         this.$store.dispatch('createMeetup', meetupData)
         this.$router.push('/meetups')
