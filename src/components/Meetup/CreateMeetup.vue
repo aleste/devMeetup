@@ -107,7 +107,15 @@
       },
       submittableDateTime () {
         const date = new Date(this.date)
-        console.log(this.date)
+        if (typeof this.time === 'string') {
+          let hours = this.time.match(/^(\d+)/)[1]
+          const minutes = this.time.match(/:(\d+)/)[1]
+          date.setHours(hours)
+          date.setMinutes(minutes)
+        } else {
+          date.setHours(this.time.getHours())
+          date.setMinutes(this.time.getMinutes())
+        }
         return date
       }
     },
