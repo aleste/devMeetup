@@ -1,7 +1,7 @@
 <template>
   <v-dialog persistent v-model="registerDialog">
     <v-btn primary accent slot="activator">
-      {{ userIsRegistered ? 'Unregister' : 'Register'}}
+      {{ userIsRegistered ? 'Unregister' : 'Register' }}
     </v-btn>
     <v-card>
       <v-container>
@@ -24,9 +24,10 @@
                 class="red--text darken-1"
                 flat
                 @click="registerDialog = false">Cancel</v-btn>
-              <v-btn class="green--text darken-1"
-                 flat
-                 @click="onAgree">Confirm</v-btn>
+              <v-btn
+                class="green--text darken-1"
+                flat
+                @click="onAgree">Confirm</v-btn>
             </v-card-actions>
           </v-flex>
         </v-layout>
@@ -52,6 +53,11 @@
     },
     methods: {
       onAgree () {
+        if (this.userIsRegistered) {
+          this.$store.dispatch('unregisterUserFromMeetup', this.meetupId)
+        } else {
+          this.$store.dispatch('registerUserForMeetup', this.meetupId)
+        }
       }
     }
   }

@@ -6,9 +6,8 @@
           indeterminate
           class="primary--text"
           :width="7"
-          :size="70">
-          </v-progress-circular>
-          </v-flex>
+          :size="70"></v-progress-circular>
+      </v-flex>
     </v-layout>
     <v-layout row wrap v-else>
       <v-flex xs12>
@@ -20,28 +19,27 @@
               <app-edit-meetup-details-dialog :meetup="meetup"></app-edit-meetup-details-dialog>
             </template>
           </v-card-title>
-              <v-card-media
-                :src="meetup.imageUrl"
-                height="400px"
-                >
-              </v-card-media>
-              <v-card-text>
-              <div class="info--text">{{ meetup.date | date }} - {{ meetup.location }}</div>
-              <div>
-                <app-edit-meetup-date-dialog
-                  :meetup="meetup" v-if="userIsCreator">
-                </app-edit-meetup-date-dialog>
-                <app-edit-meetup-time-dialog
-                  :meetup="meetup" v-if="userIsCreator">
-                </app-edit-meetup-time-dialog>
-              </div>
-                <div>{{ meetup.description }}</div>
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <app-meetup-register-dialog
-                  :meetupId="meetup.id"></app-meetup-register-dialog>
-              </v-card-actions>
+          <v-card-media
+            :src="meetup.imageUrl"
+            height="400px"
+          ></v-card-media>
+          <v-card-text>
+            <div class="info--text">{{ meetup.date | date }} - {{ meetup.location }}</div>
+            <div>
+              <app-edit-meetup-date-dialog
+                :meetup="meetup" v-if="userIsCreator">
+              </app-edit-meetup-date-dialog>
+              <app-edit-meetup-time-dialog
+                :meetup="meetup" v-if="userIsCreator">
+              </app-edit-meetup-time-dialog>
+            </div>
+            <div>{{ meetup.description }}</div>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <app-meetup-register-dialog
+              :meetupId="meetup.id"></app-meetup-register-dialog>
+          </v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>
@@ -53,11 +51,10 @@
     props: ['id'],
     computed: {
       meetup () {
-        return this.$store.getters.loadMeetup(this.id)
+        return this.$store.getters.loadedMeetup(this.id)
       },
       userIsAuthenticated () {
-        return this.$store.getters.user !== null &&
-                this.$store.getters.user !== undefined
+        return this.$store.getters.user !== null && this.$store.getters.user !== undefined
       },
       userIsCreator () {
         if (!this.userIsAuthenticated) {
