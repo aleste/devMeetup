@@ -8,10 +8,8 @@
               <v-flex xs5 sm4 md3>
                 <v-card-media
                   :src="meetup.imageUrl"
-                  height="125px"
-                  contain
-                  >
-                </v-card-media>
+                  height="130px"
+                ></v-card-media>
               </v-flex>
               <v-flex xs7 sm8 md9>
                 <v-card-title primary-title>
